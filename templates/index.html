@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Song Lyric Information Retrieval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result h2 {
+            margin: 0;
+            padding: 0;
+        }
+        .result p {
+            margin: 5px 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Song Lyric Information Retrieval</h1>
+    <form method="POST">
+        <input type="text" name="query" placeholder="Enter song title or lyrics" required>
+        <input type="submit" value="Search">
+    </form>
+    <div class="result">
+        {% if query %}
+            <h2>Results for "{{ query }}":</h2>
+            {% if results %}
+                <ul>
+                    {% for filename, score in results %}
+                        <li><strong>{{ filename }}</strong> - Similarity: {{ score }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No matching lyrics found.</p>
+            {% endif %}
+        {% endif %}
+    </div>
+</body>
+</html>
